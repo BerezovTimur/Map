@@ -17,41 +17,43 @@ class FileOpenManagerTest {
     private String jpg = "jpg";
     private String doc = "doc";
     private String gif = "gif";
-    private String caps = "HTML";
+    private String chrome = "Chrome";
+    private String xnview = "XNView";
+    private String word = "Word";
 
     @BeforeEach
     void setup() {
         manager = new FileOpenManager();
-        manager.newApplication(html, "Chrome");
-        manager.newApplication(xml, "Chrome");
-        manager.newApplication(jpg, "XNView");
-        manager.newApplication(doc, "Word");
-        manager.newApplication(gif, "XNView");
+        manager.newApplication(html, chrome);
+        manager.newApplication(xml, chrome);
+        manager.newApplication(jpg, xnview);
+        manager.newApplication(doc, word);
+        manager.newApplication(gif, xnview);
     }
 
     @Test
     void shouldGetApp() {
-        assertEquals("Chrome", manager.getApplication(html));
+        assertEquals(chrome, manager.getApplication(html));
     }
 
     @Test
     void shouldAddAll() {
         HashMap<String, String> expected = new HashMap<>();
-        expected.put(html, "Chrome");
-        expected.put(xml, "Chrome");
-        expected.put(jpg, "XNView");
-        expected.put(doc, "Word");
-        expected.put(gif, "XNView");
+        expected.put(html, chrome);
+        expected.put(xml, chrome);
+        expected.put(jpg, xnview);
+        expected.put(doc, word);
+        expected.put(gif, xnview);
         assertEquals(expected, manager.getMaps());
     }
 
     @Test
     void shouldRemoveKey() {
         HashMap<String, String> expected = new HashMap<>();
-        expected.put(html, "Chrome");
-        expected.put(jpg, "XNView");
-        expected.put(doc, "Word");
-        expected.put(gif, "XNView");
+        expected.put(html, chrome);
+        expected.put(jpg, xnview);
+        expected.put(doc, word);
+        expected.put(gif, xnview);
         manager.removeKey(xml);
         assertEquals(expected, manager.getMaps());
     }
@@ -67,7 +69,7 @@ class FileOpenManagerTest {
     @Test
     void shouldGetAllValuesSorted() {
         List<String> expected = new ArrayList<>();
-        expected.addAll(List.of("Chrome", "Word", "XNView"));
+        expected.addAll(List.of(chrome, word, xnview));
         List<String> actual = manager.getAllValues();
         assertEquals(expected, actual);
     }
